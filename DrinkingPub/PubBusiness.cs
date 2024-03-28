@@ -30,10 +30,10 @@
             table1.TakeOrder(order2);
 
             // Na kraju se izračuna ukupni iznos računa za stol
-            double ceh1 = table1.TotalToPay();
-            Console.WriteLine($"Račun za table1: {ceh1}");
-            double ceh2 = table2.TotalToPay();
-            Console.WriteLine($"Račun za table2: {ceh2}");
+            double bill1 = table1.TotalToPay(pricelist);
+            Console.WriteLine($"Račun za table1: {bill1}");
+            double bill2 = table2.TotalToPay(pricelist);
+            Console.WriteLine($"Račun za table2: {bill2}");
         }
     }
 }
