@@ -1,39 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Vsite.Oom.DrinkingPub
+﻿namespace Vsite.Oom.DrinkingPub
 {
-    public class Table
+    public class Table(int id, string name)
     {
-        private readonly int _tableId;
-        public readonly string Name;
+        public readonly int TableId = id;
+        public readonly string Name = name;
 
-        public List<Order> _tableOrders = new List<Order>();
+        public Order? TableOrder;
 
-        public Table(int id, string name)
+        public void TakeOrder(Order? inputOrder)
         {
-            _tableId = id;
-            Name = name;
+            TableOrder = inputOrder;
         }
 
-        public void TakeOrder(Order inputOrder)
-        {
-            _tableOrders.Add(inputOrder);
-        }
-        public double TotalToPay()
+        public double TotalToPay(Pricelist pricelist)
         {
             double total = 0;
 
-            foreach (Order inputOrder in _tableOrders)
+            if (TableOrder != null)
             {
-                foreach (var item in inputOrder._orderItems)
+                foreach (var item in TableOrder.OrderItems)
                 {
-                    total += (item.Value * )
+                    if (pricelist.ItemsOnMenu.TryGetValue(item.Key, out double price))
+                    {
+                        total += item.Value * price;
+                    }
                 }
             }
+
             return total;
         }
     }

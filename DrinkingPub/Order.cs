@@ -1,20 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Vsite.Oom.DrinkingPub
+﻿namespace Vsite.Oom.DrinkingPub
 {
     public class Order
     {
-        public Dictionary<string, double> _orderItems = new Dictionary<string, double>();
+        public Dictionary<string, double> OrderItems = new();
 
         public Order() { }
 
-        public void AddItem(string itemName, double itemPrice)
+        public bool AddItem(string itemName, double quantity)
         {
-            _orderItems.Add(itemName, itemPrice);
+            if (OrderItems != null)
+            {
+                if (OrderItems.ContainsKey(itemName))
+                    OrderItems[itemName] += quantity;
+                else
+                    OrderItems.Add(itemName, quantity);
+
+                return true;
+            }
+            return false;
         }
     }
 }

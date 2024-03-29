@@ -27,7 +27,7 @@
 
             Order order2 = new Order();
             order2.AddItem("Vinjak Cezar, 0.02 l", 5);
-            table1.TakeOrder(order2);
+            table2.TakeOrder(order2); //Should be table2, not table1
 
             // Na kraju se izračuna ukupni iznos računa za stol
             double bill1 = table1.TotalToPay(pricelist);

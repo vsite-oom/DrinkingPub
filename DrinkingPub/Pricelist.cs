@@ -1,23 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Vsite.Oom.DrinkingPub
+﻿namespace Vsite.Oom.DrinkingPub
 {
-    public static class Pricelist
+    public class Pricelist
     {
-        public static readonly string? _pubName;
-        public static Dictionary<string, double> ItemsOnMenu = new Dictionary<string, double>();
+        public readonly string? PubName;
+        public readonly Dictionary<string, double> ItemsOnMenu;
 
         public Pricelist(string pubName)
         {
-            _pubName = pubName;
+            PubName = pubName;
+            ItemsOnMenu = new();
+
         }
-        public static void AddItem(string itemName, double price)
+        public bool AddItem(string itemName, double price)
         {
-            ItemsOnMenu.Add(itemName, price);
+            try
+            {
+                ItemsOnMenu?.Add(itemName, price);
+                return true;
+            }
+            catch (NullReferenceException)
+            {
+
+                return false;
+            }
+
         }
     }
 }
