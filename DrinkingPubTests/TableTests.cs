@@ -7,56 +7,70 @@ namespace Vsite.Oom.DrinkingPub.Tests
     public class TableTests
     {
         [TestMethod]
-        public void TableConstructor_ReturnsNewTableObject()
+        public void Constructor_SetsCorrectProperties()
         {
-            Table tableObject = new(1, "TestName");
+            int tableId = 1;
+            string tableName = "TestName";
+
+            Table tableObject = new Table(tableId, tableName);
 
             Assert.IsNotNull(tableObject);
-            Assert.AreEqual(1, tableObject.TableId);
-            Assert.AreEqual("TestName", tableObject.Name);
+            Assert.AreEqual(tableId, tableObject.TableId);
+            Assert.AreEqual(tableName, tableObject.Name);
+            Assert.IsNotNull(tableObject.TableOrders);
+            Assert.AreEqual(0, tableObject.TotalCost);
         }
 
         [TestMethod]
-        public void TableTotalToPay_WithPricelistAndOrder_ReturnsTotalAmountToPay()
+        public void TakeOrder_AddsOrderToTableOrders()
         {
-            Pricelist pricelist = new("TestingPubName");
-            pricelist.AddItem("Item1", 2.50);
-            pricelist.AddItem("Item2", 1.20);
+            Table table = new Table(1, "TestTable");
+            Order order = new Order();
 
-            Table table1 = new(1, "TestTable");
-            Assert.IsNotNull(table1);
+            table.TakeOrder(order);
 
-            Order newOrder = new Order();
-            newOrder.AddItem("Item1", 2);
-            newOrder.AddItem("Item2", 10);
-
-            table1.TakeOrder(newOrder);
-
-            Assert.AreEqual(17, table1.TotalToPay(pricelist));
+            Assert.AreEqual(1, table.TableOrders.Count);
+            Assert.IsTrue(table.TableOrders.Contains(order));
         }
 
         [TestMethod]
-        public void TableTotalToPay_WithAddedOnTopItems_ReturnsTotalAmountToPay()
+        public void TotalToPay_WithPricelistAndOrder_ReturnsCorrectTotalAmountToPay()
         {
-            Pricelist pricelist = new("TestingPubName");
+            Pricelist pricelist = new Pricelist("TestingPubName");
             pricelist.AddItem("Item1", 2.50);
-            pricelist.AddItem("Item2", 1.20);
+            pricelist.AddItem("Item2", 3.75);
 
-            Table table1 = new(1, "TestTable");
-            Assert.IsNotNull(table1);
+            Table table = new Table(1, "TestTable");
+            Order order = new Order();
+            order.AddItem("Item1", 2);
+            order.AddItem("Item2", 1);
+            table.TakeOrder(order);
 
-            Order newOrder = new Order();
-            newOrder.AddItem("Item1", 2);
-            newOrder.AddItem("Item2", 10);
+            double totalToPay = table.TotalToPay(pricelist);
 
-            table1.TakeOrder(newOrder);
+            Assert.AreEqual(8.75, totalToPay);
+        }
 
-            Assert.AreEqual(17, table1.TotalToPay(pricelist));
+        [TestMethod]
+        public void TotalToPay_WithMultipleOrders_ReturnsCorrectTotalAmountToPay()
+        {
+            Pricelist pricelist = new Pricelist("TestingPubName");
+            pricelist.AddItem("Item1", 2.50);
+            pricelist.AddItem("Item2", 3.75);
 
-            newOrder.AddItem("Item1", 2);
-            newOrder.AddItem("Item2", 5);
+            Table table = new Table(1, "TestTable");
+            Order order1 = new Order();
+            order1.AddItem("Item1", 2);
+            order1.AddItem("Item2", 1);
+            table.TakeOrder(order1);
 
-            Assert.AreEqual(28, table1.TotalToPay(pricelist));
+            Order order2 = new Order();
+            order2.AddItem("Item1", 1);
+            table.TakeOrder(order2);
+
+            double totalToPay = table.TotalToPay(pricelist);
+
+            Assert.AreEqual(11.25, totalToPay);
         }
     }
 }

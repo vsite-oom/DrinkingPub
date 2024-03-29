@@ -1,27 +1,50 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+
 namespace Vsite.Oom.DrinkingPub.Tests
 {
     [TestClass]
     public class PricelistTests
     {
         [TestMethod]
-        public void PricelistConstructor_ReturnsNewObject()
+        public void Constructor_WithValidPubName_CreatesPricelistObject()
         {
-            Pricelist pricelistObject = new("Testing pub name");
+            string pubName = "PubName";
+            Pricelist pricelist = new Pricelist(pubName);
 
-            Assert.IsNotNull(pricelistObject);
-            Assert.AreEqual("Testing pub name", pricelistObject.PubName);
+            Assert.IsNotNull(pricelist);
+            Assert.AreEqual(pubName, pricelist.PubName);
+            Assert.IsNotNull(pricelist.ItemsOnMenu);
         }
 
         [TestMethod]
-        public void PricelistAddItem_WithNameAndPrice_ReturnsTrueIfItemIsAdded()
+        public void Constructor_WithNullOrEmptyPubName_ThrowsArgumentException()
         {
-            Pricelist pricelistObject = new("Testing pub name");
-            Assert.IsNotNull(pricelistObject);
+            Assert.ThrowsException<ArgumentException>(() => new Pricelist(null));
+            Assert.ThrowsException<ArgumentException>(() => new Pricelist(""));
+        }
 
-            Assert.IsTrue(pricelistObject.AddItem("Uštrcak, 0.5 l", 1.23));
-            Assert.IsTrue(pricelistObject.AddItem("Coca Cola, 0.33 l", 1.5));
-            Assert.IsTrue(pricelistObject.AddItem("Ledeni èaj, 0.25 l", 1.75));
-            Assert.IsTrue(pricelistObject.AddItem("Vinjak Cezar, 0.02 l", 2.23));
+        [TestMethod]
+        public void AddItem_WithValidItemNameAndPrice_AddsItemToMenu()
+        { 
+            Pricelist pricelist = new Pricelist("PubName");
+            string itemName = "Beer";
+            double price = 3.50;
+
+            pricelist.AddItem(itemName, price);
+
+            Assert.IsTrue(pricelist.ItemsOnMenu.ContainsKey(itemName));
+            Assert.AreEqual(price, pricelist.ItemsOnMenu[itemName]);
+        }
+
+        [TestMethod]
+        public void AddItem_WithNullOrEmptyItemName_ThrowsArgumentException()
+        {
+            Pricelist pricelist = new Pricelist("PubName");
+            double price = 3.50;
+
+            Assert.ThrowsException<ArgumentException>(() => pricelist.AddItem(null, price));
+            Assert.ThrowsException<ArgumentException>(() => pricelist.AddItem("", price));
         }
     }
 }
