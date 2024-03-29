@@ -2,28 +2,28 @@
 {
     public class Pricelist
     {
-        public readonly string? PubName;
+        public readonly string PubName;
         public readonly Dictionary<string, double> ItemsOnMenu;
 
         public Pricelist(string pubName)
         {
+            if (string.IsNullOrEmpty(pubName))
+            {
+                throw new ArgumentException("Pub name cannot be null or empty.", nameof(pubName));
+            }
+
             PubName = pubName;
             ItemsOnMenu = new();
 
         }
-        public bool AddItem(string itemName, double price)
+        public void AddItem(string itemName, double price)
         {
-            try
+            if(string.IsNullOrEmpty(itemName))
             {
-                ItemsOnMenu?.Add(itemName, price);
-                return true;
-            }
-            catch (NullReferenceException)
-            {
-
-                return false;
+                throw new ArgumentException("Item name cannot be null or empty.", nameof(PubName));
             }
 
+            ItemsOnMenu?.Add(itemName, price);
         }
     }
 }

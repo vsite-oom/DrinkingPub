@@ -2,22 +2,23 @@
 {
     public class Order
     {
-        public Dictionary<string, double> OrderItems = new();
+        public Dictionary<string, int> OrderItems = new();
 
         public Order() { }
 
-        public bool AddItem(string itemName, double quantity)
+        public bool AddItem(string itemName, int quantity)
         {
-            if (OrderItems != null)
-            {
-                if (OrderItems.ContainsKey(itemName))
-                    OrderItems[itemName] += quantity;
-                else
-                    OrderItems.Add(itemName, quantity);
+            if (string.IsNullOrEmpty(itemName))
+                throw new ArgumentException("Item name cannot be empty or null", nameof(itemName));
+            if (quantity <= 0)
+                throw new ArgumentException("Quantity cannot be zero or null", nameof(quantity));
 
-                return true;
-            }
-            return false;
+            if (OrderItems.ContainsKey(itemName))
+                OrderItems[itemName] += quantity;
+            else
+                OrderItems.Add(itemName, quantity);
+
+            return true;
         }
     }
 }

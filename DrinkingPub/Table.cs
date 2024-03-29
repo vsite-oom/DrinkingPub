@@ -1,33 +1,53 @@
 ﻿namespace Vsite.Oom.DrinkingPub
 {
-    public class Table(int id, string name)
+    public class Table
     {
-        public readonly int TableId = id;
-        public readonly string Name = name;
 
-        public Order? TableOrder;
+        public double TotalCost { get; private set; }
+        public int TableId { get; }
+        public string Name { get; }
+        public List<Order> TableOrders { get; }
 
-        public void TakeOrder(Order? inputOrder)
+
+        public Table(int id, string name)
         {
-            TableOrder = inputOrder;
+            TableId = id;
+            Name = name;
+            TableOrders = new();
+            TotalCost = 0;
+        }
+
+        public bool TakeOrder(Order inputOrder)
+        {
+            try
+            {
+                TableOrders.Add(inputOrder);
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+            
         }
 
         public double TotalToPay(Pricelist pricelist)
         {
-            double total = 0;
-
-            if (TableOrder != null)
+            double cost = 0;
+            foreach (var orders in TableOrders)
             {
-                foreach (var item in TableOrder.OrderItems)
+                foreach (var order in orders.OrderItems)
                 {
-                    if (pricelist.ItemsOnMenu.TryGetValue(item.Key, out double price))
+                    if (pricelist.ItemsOnMenu.TryGetValue(order.Key, out double price))
                     {
-                        total += item.Value * price;
+                        cost += order.Value * price;
                     }
                 }
             }
 
-            return total;
+            TotalCost = cost;
+            return Math.Round(TotalCost, 2);
         }
     }
 }
