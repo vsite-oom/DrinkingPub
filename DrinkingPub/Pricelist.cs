@@ -17,9 +17,9 @@
 
         public void AddItem(string itemName, double price)
         {
-            if (itemName == null)
+            if (string.IsNullOrEmpty(itemName))
             {
-                throw new ArgumentNullException("naziv artikla ne moze biti prazan", nameof(itemName));
+                throw new ArgumentException("naziv artikla ne moze biti prazan", nameof(itemName));
             }
         
             MenuItems[itemName] = price;
@@ -29,7 +29,7 @@
         {
             if (string.IsNullOrEmpty(itemName))
             {
-                throw new ArgumentException("naziv artikla ne moze biti null ili prazan.", nameof(itemName));
+                throw new ArgumentException("naziv artikla ne moze biti prazan.", nameof(itemName));
             }
 
             if (!MenuItems.TryGetValue(itemName, out double price))
