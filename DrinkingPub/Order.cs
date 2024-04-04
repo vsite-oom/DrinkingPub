@@ -3,7 +3,7 @@
     public class Order
     {
 
-        private Dictionary<string, int> items = new Dictionary<string, int>();
+        private Dictionary<string, int> items = new Dictionary<string, int>((StringComparer.OrdinalIgnoreCase));
 
         public Order() { }
 

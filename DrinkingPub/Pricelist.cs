@@ -3,7 +3,7 @@
     public class Pricelist
     {
         public string PubName { get; }
-        private readonly Dictionary<string, double> MenuItems = new Dictionary<string, double>();
+        private readonly Dictionary<string, double> MenuItems = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase);
 
         public Pricelist(string pubName)
         {
