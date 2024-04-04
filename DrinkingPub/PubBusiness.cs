@@ -29,11 +29,11 @@
             //order2.additem("vinjak cezar, 0.02 l", 5);
             //table1.takeorder(order2);
 
-            // Na kraju se izračuna ukupni iznos računa za stol
-            double bill1 = table1.TotalToPay(pricelist);
-            Console.WriteLine($"Račun za table1: {bill1}");
-            double bill2 = table2.TotalToPay(pricelist);
-            Console.WriteLine($"Račun za table2: {bill2}");
+            //// Na kraju se izračuna ukupni iznos računa za stol
+            //double bill1 = table1.TotalToPay(pricelist);
+            //Console.WriteLine($"Račun za table1: {bill1}");
+            //double bill2 = table2.TotalToPay(pricelist);
+            //Console.WriteLine($"Račun za table2: {bill2}");
         }
     }
 }
