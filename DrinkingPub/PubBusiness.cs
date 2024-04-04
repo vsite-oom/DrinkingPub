@@ -16,24 +16,24 @@
             Table table1 = new Table(1, "andrej");
             Table table2 = new Table(2, "zoran");
 
-            //// ukreira se narudžba...
-            //Order order1 = new Order();
-            //// ... i u nju se dodaju napitci i količina
-            //order1.additem("coca cola, 0.33 l", 3);
-            //order1.additem("uštrcak, 0.5 l", 1);
+            // ukreira se narudžba...
+            Order order1 = new Order();
+            // ... i u nju se dodaju napitci i količina
+            order1.AddItem("coca cola, 0.33 l", 3);
+            order1.AddItem("uštrcak, 0.5 l", 1);
 
-            ////zaprima se narudžba za određeni stol
-            //table1.takeorder(order1);
+            //zaprima se narudžba za određeni stol
+            table1.TakeOrder(order1);
 
-            //order order2 = new order();
-            //order2.additem("vinjak cezar, 0.02 l", 5);
-            //table1.takeorder(order2);
+            Order order2 = new Order();
+            order2.AddItem("vinjak cezar, 0.02 l", 5);
+            table1.TakeOrder(order2);
 
-            //// Na kraju se izračuna ukupni iznos računa za stol
-            //double bill1 = table1.TotalToPay(pricelist);
-            //Console.WriteLine($"Račun za table1: {bill1}");
-            //double bill2 = table2.TotalToPay(pricelist);
-            //Console.WriteLine($"Račun za table2: {bill2}");
+            // Na kraju se izračuna ukupni iznos računa za stol
+            double bill1 = table1.TotalToPay(pricelist);
+            Console.WriteLine($"Račun za table1: {bill1}");
+            double bill2 = table2.TotalToPay(pricelist);
+            Console.WriteLine($"Račun za table2: {bill2}");
         }
     }
 }

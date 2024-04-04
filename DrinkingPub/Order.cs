@@ -1,12 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Vsite.Oom.DrinkingPub
+﻿namespace Vsite.Oom.DrinkingPub
 {
-    internal class Order
+    public class Order
     {
+
+        private Dictionary<string, int> items = new Dictionary<string, int>();
+
+        public Order() { }
+
+        public void AddItem(string itemName, int itemQuantity)
+        {
+            if (string.IsNullOrEmpty(itemName))
+            {
+                throw new ArgumentException("naziv artikla ne moze biti prazan", nameof(itemName));
+            }
+            if (itemQuantity <= 0)
+            {
+                throw new ArgumentException("kolicina mora biti veca od 0", nameof(itemQuantity));
+            }
+
+            if (items.ContainsKey(itemName))
+            {
+                items[itemName] += itemQuantity;
+            }
+            else
+            {
+                items.Add(itemName, itemQuantity);
+            }
+        }
+        public Dictionary<string, int> Items => items;
     }
 }
