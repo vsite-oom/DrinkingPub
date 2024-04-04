@@ -12,17 +12,17 @@
             pricelist.AddItem("Ledeni čaj, 0.25 l", 1.75);
             pricelist.AddItem("Vinjak Cezar, 0.02 l", 2.23);
 
-            //// svaki stol ima svoj broj i ime konobara koji ga poslužuje
-            //table table1 = new table(1, "andrej");
-            //table table2 = new table(2, "zoran");
+            // svaki stol ima svoj broj i ime konobara koji ga poslužuje
+            Table table1 = new Table(1, "andrej");
+            Table table2 = new Table(2, "zoran");
 
             //// ukreira se narudžba...
-            //order order1 = new order();
+            //Order order1 = new Order();
             //// ... i u nju se dodaju napitci i količina
             //order1.additem("coca cola, 0.33 l", 3);
             //order1.additem("uštrcak, 0.5 l", 1);
 
-            //// zaprima se narudžba za određeni stol
+            ////zaprima se narudžba za određeni stol
             //table1.takeorder(order1);
 
             //order order2 = new order();
