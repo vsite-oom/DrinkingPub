@@ -37,7 +37,7 @@
             double cost = 0;
             foreach (var orders in TableOrders)
             {
-                foreach (var order in orders.OrderItems)
+                foreach (var order in orders.GetOrderItems())
                 {
                     if (pricelist.ItemsOnMenu.TryGetValue(order.Key, out double price))
                     {

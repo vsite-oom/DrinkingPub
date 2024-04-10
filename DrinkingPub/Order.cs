@@ -2,9 +2,14 @@
 {
     public class Order
     {
-        public Dictionary<string, int> OrderItems = new();
+        private Dictionary<string, int> OrderItems = new();
 
         public Order() { }
+
+        public Dictionary<string, int> GetOrderItems()
+        {
+            return OrderItems;
+        }
 
         public bool AddItem(string itemName, int quantity)
         {
