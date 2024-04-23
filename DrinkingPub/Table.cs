@@ -7,7 +7,7 @@ namespace Vsite.Oom.DrinkingPub
         public int Number { get; }
         public string Waiter { get; }
 
-        public List<Order> Orders = new List<Order>();
+        private readonly List<Order> _orders = new();
 
         public Table(int number, string waiter)
         {
@@ -20,17 +20,17 @@ namespace Vsite.Oom.DrinkingPub
             if (order == null)
                 throw new ArgumentNullException(nameof(order));
 
-            Orders.Add(order);
+            _orders.Add(order);
         }
 
         public double TotalToPay(Pricelist pricelist)
         {
             double total = 0;
-            foreach (var order in Orders)
+            foreach (var order in _orders)
             {
                 foreach (var item in order.Items)
                 {
-                    total += item.Value * pricelist.Items[item.Key];
+                    total += pricelist.GetPrice(item.Key) * item.Value;
                 }
             }
             return Math.Round(total, 2);

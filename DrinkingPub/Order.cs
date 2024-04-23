@@ -4,7 +4,8 @@ namespace Vsite.Oom.DrinkingPub
 {
     public class Order
     {
-        public Dictionary<string, int> Items = [];
+        private readonly Dictionary<string, int> _items = [];
+        public IReadOnlyDictionary<string, int> Items => _items;
 
         public void AddItem(string name, int quantity)
         {
@@ -14,10 +15,10 @@ namespace Vsite.Oom.DrinkingPub
             if(quantity <= 0)
                 throw new ArgumentException("Quantity must be greater than 0", nameof(quantity));
 
-            if (Items.ContainsKey(name))
-                Items[name] += quantity;
+            if (_items.ContainsKey(name))
+                _items[name] += quantity;
             else
-                Items.Add(name, quantity);
+                _items.Add(name, quantity);
         }
     }
 }
