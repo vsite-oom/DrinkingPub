@@ -39,7 +39,7 @@ namespace DrinkingPub.Tests
 
             pricelist.AddItem(itemName, itemPrice);
 
-            Assert.AreEqual(itemPrice, pricelist.Items[itemName]);
+            Assert.AreEqual(itemPrice, pricelist.GetPrice(itemName));
         }
     }
 }

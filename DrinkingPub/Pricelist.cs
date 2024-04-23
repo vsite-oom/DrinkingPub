@@ -5,7 +5,8 @@ namespace Vsite.Oom.DrinkingPub
     public class Pricelist
     {
         public string PubName { get; }
-        public Dictionary<string, double> Items = [];
+        private readonly Dictionary<string, double> _items = [];
+
         public Pricelist(string pubName)
         {
             if (string.IsNullOrEmpty(pubName))
@@ -19,7 +20,15 @@ namespace Vsite.Oom.DrinkingPub
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException("Name cannot be null or empty", nameof(name));
 
-            Items.Add(name, price);
+            _items.Add(name, price);
+        }
+
+        public double GetPrice(string name)
+        {
+            if (!_items.ContainsKey(name))
+                throw new ArgumentException($"Item {name} not found in pricelist", nameof(name));
+
+            return _items[name];
         }
     }
 }
