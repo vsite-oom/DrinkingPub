@@ -16,8 +16,15 @@ namespace Vsite.Oom.DrinkingPub.Tests
 
             order.AddItem(itemName, itemQuantity);
 
-            Assert.AreEqual(itemQuantity, order.Items[itemName]);
-            Assert.IsTrue(order.Items.ContainsKey(itemName));
+            // potrebna konverzija IEnumerable u Dictionary posto IEnumerable ne podrzava metodu ContainsKey
+            var itemsDictionary = new Dictionary<string, int>(order.Items);
+
+            //Assert.AreEqual(itemQuantity, order.Items[itemName]);
+            //Assert.IsTrue(order.Items.ContainsKey(itemName));
+
+            Assert.AreEqual(itemQuantity, itemsDictionary[itemName]);
+            Assert.IsTrue(itemsDictionary.ContainsKey(itemName));
+
         }
 
         [TestMethod]

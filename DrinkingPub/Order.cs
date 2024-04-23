@@ -27,6 +27,9 @@
                 items.Add(itemName, itemQuantity);
             }
         }
-        public Dictionary<string, int> Items => items;
+
+        // izmijenjeno prema uputi
+        public IEnumerable<KeyValuePair<string, int>> Items => items.AsEnumerable();
+
     }
 }
