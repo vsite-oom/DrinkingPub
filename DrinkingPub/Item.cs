@@ -8,8 +8,8 @@ namespace Vsite.Oom.DrinkingPub
 {
     public struct Item
     {
-        public string itemName;
-        public double itemPrice;
+        public readonly string itemName;
+        public readonly double itemPrice;
 
         public Item(string name, double price)
         {

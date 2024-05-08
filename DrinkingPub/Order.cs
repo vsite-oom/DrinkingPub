@@ -9,12 +9,7 @@ namespace Vsite.Oom.DrinkingPub
 {
     public class Order
     {
-        private Dictionary<Item, int> orderItems;
-
-        public Order()
-        {
-            orderItems = new Dictionary<Item, int>();
-        }
+        private readonly Dictionary<Item, int> orderItems = new Dictionary<Item, int>();
 
         public Dictionary<Item, int> OrderItems
         {
