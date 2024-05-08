@@ -21,8 +21,13 @@ namespace Vsite.Oom.DrinkingPub.Tests
             order1.AddItem("Coca Cola, 0.33 l", 3);
             order1.AddItem("Uštrcak, 0.5 l", 1);
 
-            Assert.AreEqual(3, order1.OrderItems[new Item("Coca Cola, 0.33 l", 1.5)]);
-            Assert.AreEqual(1, order1.OrderItems[new Item("Uštrcak, 0.5 l", 1.23)]);
+            //Stari OrderItems:
+            //Assert.AreEqual(3, order1.OrderItems[new Item("Coca Cola, 0.33 l", 1.5)]);
+            //Assert.AreEqual(1, order1.OrderItems[new Item("Uštrcak, 0.5 l", 1.23)]);
+
+            //Novi OrderItems:
+            Assert.AreEqual(3, order1.OrderItems.FirstOrDefault(item => item.Key.itemName == "Coca Cola, 0.33 l").Value);
+            Assert.AreEqual(1, order1.OrderItems.FirstOrDefault(item => item.Key.itemName == "Uštrcak, 0.5 l").Value);
         }
     }
 }
