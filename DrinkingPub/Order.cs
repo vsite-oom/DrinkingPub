@@ -18,20 +18,6 @@ namespace Vsite.Oom.DrinkingPub
                 return orderItems; 
             } 
         }
-        public Item this[string name]
-        {
-            get
-            {
-                foreach (var orderItem in orderItems)
-                {
-                    if (orderItem.Key.itemName == name)
-                    {
-                        return orderItem.Key;
-                    }
-                }
-                throw new Exception($"Item {name} not found.");
-            }
-        }
 
         public void AddItem(string name, int quantity)
         {
