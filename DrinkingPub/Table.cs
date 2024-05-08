@@ -20,7 +20,6 @@ namespace Vsite.Oom.DrinkingPub
             tableNumber = number;
             waiterName = name;
             orders = new List<Order>();
-            totalToPay = 0;
         }
 
         public void TakeOrder(Order order)
@@ -30,6 +29,7 @@ namespace Vsite.Oom.DrinkingPub
 
         public double TotalToPay(Pricelist pricelist)
         {
+            totalToPay = 0;
             foreach (var order in orders)
             {
                 foreach (var orderItem in order.OrderItems)
